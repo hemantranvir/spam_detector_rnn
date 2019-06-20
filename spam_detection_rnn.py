@@ -1,4 +1,4 @@
-from keras.layers import SimpleRNN, LSTM, Embedding, Dense, Flatten
+from keras.layers import SimpleRNN, LSTM, GRU, Embedding, Dense, Flatten
 from keras.models import Sequential
 from keras.preprocessing.text import Tokenizer
 from keras.preprocessing.sequence import pad_sequences
@@ -76,8 +76,10 @@ def main(rnn_model):
 
     if rnn_model == 'SimpleRNN':
         model.add(SimpleRNN(units=embedding_mat_columns))
-    else:
+    elif rnn_model == 'LSTM':
         model.add(LSTM(units=embedding_mat_columns))
+    else:
+        model.add(GRU(units=embedding_mat_columns))
 
     model.add(Dense(1, activation='sigmoid'))
 
@@ -103,3 +105,4 @@ def main(rnn_model):
 if __name__ == '__main__':
     main('SimpleRNN')
     main('LSTM')
+    main('GRU')
